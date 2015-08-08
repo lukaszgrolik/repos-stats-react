@@ -1,0 +1,25 @@
+{
+  "name": "repos-stats-react",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Łukasz Grolik",
+  "license": "MIT",
+  "devDependencies": {
+    "babelify": "6.1.3",
+    "browserify": "11.0.1",
+    "gulp": "3.9.0",
+    "gulp-load-plugins": "0.10.0",
+    "gulp-plumber": "1.0.1",
+    "gulp-react": "3.0.1",
+    "gulp-webserver": "0.9.1",
+    "vinyl-source-stream": "1.1.0"
+  },
+  "dependencies": {
+    "react": "0.13.3",
+    "underscore": "1.8.3"
+  }
+}
