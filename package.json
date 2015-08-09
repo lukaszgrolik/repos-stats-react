@@ -19,6 +19,7 @@
     "vinyl-source-stream": "1.1.0"
   },
   "dependencies": {
+    "axios": "0.5.4",
     "react": "0.13.3",
     "underscore": "1.8.3"
   }
