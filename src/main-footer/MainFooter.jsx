@@ -1,10 +1,13 @@
 import React from 'react';
+import FAQBlock from './FAQBlock';
+import CopyrightBlock from './CopyrightBlock';
 
 class MainFooter extends React.Component {
   render() {
     return (
       <div>
-        <div>main footer</div>
+        <FAQBlock />
+        <CopyrightBlock />
       </div>
     );
   }

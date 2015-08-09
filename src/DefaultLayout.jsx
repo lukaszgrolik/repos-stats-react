@@ -1,7 +1,7 @@
 import React from 'react';
-import MainHeader from './MainHeader';
+import MainHeader from './main-header/MainHeader';
 import MainContent from './MainContent';
-import MainFooter from './MainFooter';
+import MainFooter from './main-footer/MainFooter';
 
 class DefaultLayout extends React.Component {
   render() {
