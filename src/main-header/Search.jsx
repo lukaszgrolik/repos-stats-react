@@ -1,5 +1,50 @@
 import React from 'react';
+import Reflux from 'reflux';
 import axios from 'axios';
+
+import SearchService from './SearchService';
+
+let actions = Reflux.createActions({
+  fetchRepos: {
+    children: ["completed","failed"],
+  },
+});
+
+actions.fetchRepos.listen(function(repos) {
+  fetchRepos(repos)
+  .then((data) => {
+    let docs = data.map((repo) => {
+      return repo.data;
+    });
+
+    this.completed(data);
+  })
+  .catch((err) => {
+    this.failed(err);
+  });
+});
+
+let repoStore = Reflux.createStore({
+  listenables: actions,
+
+  onFetchRepos(data) {
+    console.log('onFetchRepos data', data)
+
+    this.trigger(data);
+  },
+
+  onFetchReposCompleted(data) {
+    console.log('onFetchReposCompleted data', data)
+
+    this.trigger(data);
+  },
+
+  onFetchReposFailed(data) {
+    console.log('onFetchReposFailed data', data)
+
+    this.trigger(data);
+  },
+});
 
 class Search extends React.Component {
   constructor(props) {
@@ -15,21 +60,24 @@ class Search extends React.Component {
   submitForm(e) {
     e.preventDefault();
 
-    console.log('submitForm search', this.state.search);
+    // console.log('submitForm search', this.state.search);
 
     // this.setState({search: ''});
 
     let repoFullName = this.state.search
     let repos = getRepos(this.state.search);
 
-    fetchRepos(repos)
-    .then((data) => {
-      console.log('data', data);
+    SearchService.repos = repos;
 
-      let docs = data.map((repo) => {
-        return repo.data;
-      });
-    });
+    actions.fetchRepos(repos);
+    // fetchRepos(repos)
+    // .then((data) => {
+    //   console.log('data', data);
+
+    //   let docs = data.map((repo) => {
+    //     return repo.data;
+    //   });
+    // });
   }
 
   changeSearch(e) {
@@ -39,6 +87,17 @@ class Search extends React.Component {
     }, () => {
       // console.log('change', this.state.search);
     });
+  }
+
+  componentDidMount() {
+    this.unsubscribe = repoStore.listen((data) => {
+      console.log('componentDidMount data', data);
+    });
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
+    this.unsubscribe();
   }
 
   render() {

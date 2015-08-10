@@ -17,19 +17,28 @@ gulp.task('connect', function() {
   }));
 });
 
+gulp.task('lint', function() {
+  return gulp.src('src/**/*')
+  .pipe(gp.jshint())
+  .pipe(gp.jshint.reporter('default'));
+});
+
 gulp.task('buildJsx', function () {
   browserify({
     entries: 'src/index.jsx',
     extensions: ['.jsx'],
     debug: true,
   })
-  .transform(babelify)
+  .transform(babelify.configure({
+    optional: ['es7.decorators'],
+  }))
   .bundle()
   .pipe(source('repos-stats.js'))
   .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build', ['buildJsx'])
+// gulp.task('build', ['lint', 'buildJsx'])
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*.jsx', ['buildJsx']);
