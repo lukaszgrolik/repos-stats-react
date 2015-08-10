@@ -19,7 +19,8 @@ gulp.task('connect', function() {
 
 gulp.task('lint', function() {
   return gulp.src('src/**/*')
-  .pipe(gp.jshint())
+  .pipe(gp.eslint())
+  .pipe(gp.eslint.format())
   .pipe(gp.jshint.reporter('default'));
 });
 
@@ -37,11 +38,12 @@ gulp.task('buildJsx', function () {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['buildJsx'])
-// gulp.task('build', ['lint', 'buildJsx'])
+// gulp.task('build', ['buildJsx'])
+gulp.task('build', ['lint', 'buildJsx'])
 
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.jsx', ['buildJsx']);
+  gulp.watch('.eslintrc', ['lint']);
+  gulp.watch('src/**/*.jsx', ['lint', 'buildJsx']);
 });
 
 gulp.task('serve', ['build', 'connect', 'watch']);

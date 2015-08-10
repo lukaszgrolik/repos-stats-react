@@ -6,15 +6,15 @@ class Chart extends React.Component {
   render() {
     // console.log('intToRGB', intToRGB(hashCode('sass/sass')))
     let chartData = {
-      labels: ["Repo 1", "Repo 2"],
+      labels: ['Repo 1', 'Repo 2'],
       datasets: [
         {
-          label: "My First dataset",
-          fillColor: "rgba(0,0,0,0.5)",
-          _strokeColor: "rgba(220,220,220,0.8)",
-          _highlightFill: "rgba(220,220,220,0.75)",
-          _highlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59]
+          label: 'My First dataset',
+          fillColor: 'rgba(0,0,0,0.5)',
+          _strokeColor: 'rgba(220,220,220,0.8)',
+          _highlightFill: 'rgba(220,220,220,0.75)',
+          _highlightStroke: 'rgba(220,220,220,1)',
+          data: [65, 59],
         },
         // {
         //   label: "My Second dataset",
@@ -24,7 +24,7 @@ class Chart extends React.Component {
         //   highlightStroke: "rgba(151,187,205,1)",
         //   data: [28, 48, 40, 19, 86, 27, 90]
         // }
-      ]
+      ],
     };
 
     let chartOptions = {
@@ -55,5 +55,5 @@ function intToRGB(i){
       .toString(16)
       .toUpperCase();
 
-  return "00000".substring(0, 6 - c.length) + c;
+  return '00000'.substring(0, 6 - c.length) + c;
 }

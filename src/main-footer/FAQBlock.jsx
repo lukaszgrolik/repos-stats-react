@@ -13,7 +13,7 @@ class FAQBlock extends React.Component {
       },
       {
         question: 'Why there is no search functionality for repositories?',
-        answer: 'GitHub has separate limit for searching - it is only ' + 67890 + ' requests per hour, so I decided not to implement front-end search functionality for now. Thus, you have to enter repositories\' names manually.'
+        answer: 'GitHub has separate limit for searching - it is only ' + 67890 + ' requests per hour, so I decided not to implement front-end search functionality for now. Thus, you have to enter repositories\' names manually.',
       },
     ];
     let faqItems = faq.map((item) => {

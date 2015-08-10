@@ -6,7 +6,7 @@ import SearchService from './SearchService';
 
 let actions = Reflux.createActions({
   fetchRepos: {
-    children: ["completed","failed"],
+    children: ['completed','failed'],
   },
 });
 
@@ -28,19 +28,19 @@ let repoStore = Reflux.createStore({
   listenables: actions,
 
   onFetchRepos(data) {
-    console.log('onFetchRepos data', data)
+    console.log('onFetchRepos data', data);
 
     this.trigger(data);
   },
 
   onFetchReposCompleted(data) {
-    console.log('onFetchReposCompleted data', data)
+    console.log('onFetchReposCompleted data', data);
 
     this.trigger(data);
   },
 
   onFetchReposFailed(data) {
-    console.log('onFetchReposFailed data', data)
+    console.log('onFetchReposFailed data', data);
 
     this.trigger(data);
   },
@@ -64,7 +64,7 @@ class Search extends React.Component {
 
     // this.setState({search: ''});
 
-    let repoFullName = this.state.search
+    let repoFullName = this.state.search;
     let repos = getRepos(this.state.search);
 
     SearchService.repos = repos;
@@ -96,7 +96,7 @@ class Search extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount')
+    console.log('componentWillUnmount');
     this.unsubscribe();
   }
 

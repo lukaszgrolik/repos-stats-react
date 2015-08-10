@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "comma-dangle": [2, "always-multiline"],
+    "no-cond-assign": [2, "except-parens"],
+    "semi": [2, "always"],
+    "quotes": [2, "single"]
+  }
+}
