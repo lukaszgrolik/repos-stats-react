@@ -1,27 +1,58 @@
 import React from 'react';
 import _ from 'underscore';
 
+import repoStore from './repoStore';
 import Chart from './Chart';
 
 class MainContent extends React.Component {
-  render() {
-    console.log('this.props', this.props);
-    let repos =_(3).times((i) => {
-      let data = {
-        number: i,
-      };
+  constructor(props) {
+    super(props);
 
-      return (
-        <li>
-          <Chart data={data} />
-        </li>
-      );
+    this.state = {
+      repos: [],
+    };
+  }
+
+  componentDidMount() {
+    this.unsubscribe = repoStore.listen((data) => {
+      // console.log('MainContent componentDidMount data', data);
+      // this.requestData = data;
+      let repos = data.map((data) => data.data);
+      // console.log('repos',repos);
+
+      this.setState({
+        repos,
+      });
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    // console.log('this.props', this.props);
+
+    let fields = [
+      'subscribers_count',
+      'stargazers_count',
+      'forks',
+      'open_issues',
+    ];
 
     return (
       <div>
         <div>main content</div>
-        <ul>{repos}</ul>
+        <ul>
+          {fields.map((field) => {
+            return (
+              <li>
+                <div>{field}</div>
+                <Chart repos={this.state.repos} field={field} />
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }

@@ -20,8 +20,7 @@ gulp.task('connect', function() {
 gulp.task('lint', function() {
   return gulp.src('src/**/*')
   .pipe(gp.eslint())
-  .pipe(gp.eslint.format())
-  .pipe(gp.jshint.reporter('default'));
+  .pipe(gp.eslint.format());
 });
 
 gulp.task('buildJsx', function () {
